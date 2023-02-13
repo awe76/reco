@@ -3,8 +3,6 @@ import { allUsers, allDomains, allTeams, me } from '../api/api';
 import './AddProcessItem.css';
 import { RelevantItemSet } from './RelevantItemSet';
 
-// const getFilter = (allItems, items) => allItems.filter(item => !items.includes(item));
-
 function useFilter(allItems, initialState = []) {
     const [items, setItems] = useState(initialState);
     const onSelectItem = useCallback(item => {
