@@ -53,6 +53,21 @@ export async function addProcessItem(item) {
     return await fetchProcesses();
 }
 
+export async function updateProcessItem(item) {
+    await fetch(`${baseUri}/process-metadata`, {
+        method: 'PUT',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            md: item
+        })
+    });
+
+    return await fetchProcesses();
+}
+
 export async function fetchProcesses() {
     const resp = await fetch(`${baseUri}/process-metadata`, {
         headers

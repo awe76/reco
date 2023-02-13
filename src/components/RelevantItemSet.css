@@ -22,3 +22,12 @@
     flex-wrap: wrap;
     gap: 0.5em;
 }
+
+.RelevantItemSet-unselectedItems {
+    padding-top: 0.5em;
+    border-top: 1px solid rgba(17, 35, 68, 0.25);
+}
+
+.RelevantItemSet-unselectedItems > h3 {
+    font-size: 0.75em;
+}

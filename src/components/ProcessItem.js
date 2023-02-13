@@ -1,22 +1,16 @@
-/* 
-    Item sample:
-    {
-      "anchors": {
-        "teams": "Procurement_europe, Procurement_usa"
-      },
-      "description": "ProcurementTeam",
-      "iconUrl": "https://i.imgur.com/GptSzgL.png",
-      "id": "2",
-      "name": "Procurement"
-    }
-*/
-
+import { useCallback } from 'react';
 import './ProcessItem.css';
 
-export function ProcessItem({item}) {
+export function ProcessItem({item, editItem}) {
     const { name, description } = item;
+
+    const onEditItem = useCallback(() => {
+        editItem(item);
+    }, [editItem, item]);
+
     return (
        <article>
+            <button onClick={onEditItem}>Edit</button>
             <h2>{name}</h2>
             <p>{description}</p>
        </article>

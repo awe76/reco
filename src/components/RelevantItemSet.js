@@ -2,21 +2,28 @@ import { useCallback, useState } from 'react';
 import { RelevantItem  } from './RelevantItem';
 import './RelevantItemSet.css';
 
-export function RelevantItemSet({ title, items, selectItem }) {
+export function RelevantItemSet({ title, selectedTitle, items, selectedItems, selectItem, unselectItem }) {
     const [isOpened, setOpened] = useState(false);
     const toggle = useCallback(() => setOpened(!isOpened), [isOpened]);
-
-    const onSelectItem = useCallback((item) => {
-        selectItem(item);
-    }, [selectItem]);
 
     return (
         <div className="RelevantItemSet">
             <button className="RelevantItemSet-toggle" onClick={toggle}>{title}</button>
             {isOpened && (
-                <div className="RelevantItemSet-items">
-                    {items.map(item => (<RelevantItem key={item} item={item} selectItem={onSelectItem} />))}
-                </div>
+                <>
+                    <div className="RelevantItemSet-items">
+                        {items.map(item => (<RelevantItem key={item} item={item} selectItem={selectItem} />))}
+                    </div>
+
+                    {selectedItems.length > 0 && (
+                        <div className="RelevantItemSet-unselectedItems">
+                            <h3>{selectedTitle} [click to undo selection]</h3>
+                            <div className="RelevantItemSet-items">
+                                {selectedItems.map(item => (<RelevantItem key={item} item={item} selectItem={unselectItem} />))}
+                            </div>
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );

@@ -5,23 +5,40 @@ import { RelevantItemSet } from './RelevantItemSet';
 
 function useFilter(allItems, initialState = []) {
     const [items, setItems] = useState(initialState);
-    const onSelectItem = useCallback(item => {
+    const selectItem = useCallback(item => {
         setItems([...items, item]);
+    }, [setItems, items]);
+
+    const unselectItem = useCallback(item => {
+        setItems(items.filter(currentItem => item !== currentItem));
     }, [setItems, items]);
 
     const availableItems = useMemo(() => {
         return allItems.filter(item => !items.includes(item));
     }, [allItems, items]);
 
-    return [items, availableItems, onSelectItem];
+
+    return [items, availableItems, selectItem, unselectItem];
 }
 
-export function AddProcessItem({ addProcessItem, onClose }) {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [users, availableUsers, onSelectUser] = useFilter(allUsers, [me]);
-    const [domains, availableDomains, onSelectDomain] = useFilter(allDomains, []);
-    const [teams, availableTeams, onSelectTeam] = useFilter(allTeams, []);
+const newItem = {
+    anchors: {
+        users: [me],
+        domains: [],
+        teams: []
+    },
+    name: '',
+    description: '',
+};
+
+export function AddProcessItem({ addProcessItem, editProcessItem, onClose, isEdit, item = newItem }) {
+    const { anchors } = item;
+
+    const [name, setName] = useState(item.name);
+    const [description, setDescription] = useState(item.description);
+    const [users, availableUsers, selectUser, unselectUser] = useFilter(allUsers, anchors.users);
+    const [domains, availableDomains, selectDomain, unselectDomain] = useFilter(allDomains, anchors.domains);
+    const [teams, availableTeams, selectTeam, unselectTeam] = useFilter(allTeams, anchors.teams);
 
     const onChangeName = e => setName(e.target.value);
     const onChangeDescription = e => setDescription(e.target.value);
@@ -30,7 +47,10 @@ export function AddProcessItem({ addProcessItem, onClose }) {
 
     const onAddProcessItem = async (e) => {
         e.preventDefault();
-        await addProcessItem({
+
+        const execute = isEdit ? editProcessItem : addProcessItem;
+        await execute({
+            id: item.id,
             anchors: {
                 users,
                 domains,
@@ -56,9 +76,9 @@ export function AddProcessItem({ addProcessItem, onClose }) {
                 Select one item from thie list below and provide us with the information we need in order to create your new process. 
             </p>
 
-            <RelevantItemSet title="Relevant user groups" selectItem={onSelectTeam} items={availableTeams} />
-            <RelevantItemSet title="Relevant domains" selectItem={onSelectDomain} items={availableDomains} />
-            <RelevantItemSet title="Relevant usernames" selectItem={onSelectUser} items={availableUsers} />
+            <RelevantItemSet title="Relevant user groups" selectedTitle="Selected user groups" items={availableTeams} selectedItems={teams} selectItem={selectTeam} unselectItem={unselectTeam} />
+            <RelevantItemSet title="Relevant domains" selectedTitle="Selected domains" items={availableDomains} selectedItems={domains} selectItem={selectDomain} unselectItem={unselectDomain} />
+            <RelevantItemSet title="Relevant usernames" selectedTitle="Selected usernames" items={availableUsers} selectedItems={users} selectItem={selectUser} unselectItem={unselectUser} />
 
             <form>
                 <fieldset>
@@ -66,7 +86,7 @@ export function AddProcessItem({ addProcessItem, onClose }) {
                 </fieldset>
 
                 <menu>
-                    <button type="submit" onClick={onAddProcessItem} disabled={!isValid()}>Add</button>
+                    <button type="submit" onClick={onAddProcessItem} disabled={!isValid()}>{isEdit ? 'Update' : 'Add'}</button>
                     <button onClick={onClose}>Cancel</button>
                 </menu>
             </form>
