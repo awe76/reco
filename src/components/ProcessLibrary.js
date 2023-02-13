@@ -1,10 +1,15 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { ProcessSet } from './ProcessSet';
 import { AddProcessItem } from './AddProcessItem';
 import { fetchProcesses, addProcessItem, isMyItem } from '../api/api';
 
 export function ProcessLibrary() {
     const [items, setItems] = useState([]);
+
+    const onAddItem = useCallback(async (item) => {
+        const items = await addProcessItem(item);
+        setItems(items);
+    }, [setItems]);
 
     const my = useMemo(() => {
         return items.filter(isMyItem);
@@ -22,7 +27,7 @@ export function ProcessLibrary() {
     useEffect(() => {
         async function fetchData() {
             const data = await fetchProcesses();
-            setItems(data.mds);
+            setItems(data);
         }
         fetchData();
     }, []);
@@ -33,7 +38,7 @@ export function ProcessLibrary() {
             <ProcessSet header="My processes" items={my} />
             <ProcessSet header="Recommended" items={recommended} />
             {isOpened && (
-                <AddProcessItem addProcessItem={addProcessItem} onClose={onClose} />
+                <AddProcessItem addProcessItem={onAddItem} onClose={onClose} />
             )}
         </>
     );

@@ -1,13 +1,13 @@
 const baseUri = 'http://localhost:8080/api/v1';
 
+let maxId = 0;
+
 const my = 'Andrei';
 
 const headers = {
     Authorization: 'test',
     accept: 'application/json'
 };
-
-
 
 export const isMyItem = (item) => {
     return item.anchors?.users?.includes(my);
@@ -22,15 +22,16 @@ export async function addProcessItem(item) {
         },
         body: JSON.stringify({
             md: {
+                ...item,
                 anchors: {
                     users: [my],
                 },
-                ...item
+                id: String(++maxId),
             }
         })
     });
 
-    await fetchProcesses();
+    return await fetchProcesses();
 }
 
 export async function fetchProcesses() {
@@ -38,5 +39,10 @@ export async function fetchProcesses() {
         headers
     });
     const data = await resp.json();
-    return data;
+
+    const result = data.mds ?? [];
+
+    // TODO: should be refined 
+    maxId = result.length;
+    return result;
 }
