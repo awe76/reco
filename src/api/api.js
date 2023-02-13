@@ -11,6 +11,21 @@ export const allUsers = [
     'Ben'
 ];
 
+export const allDomains = [
+    'Google',
+    'Microsoft'
+];
+
+export const allTeams = [
+    'Finance_legal',
+    'Finance_purchases',
+    'Procurement_europe',
+    'Procurement_usa',
+    'Rnd_dev',
+    'Rnd_qa',
+    'Rnd_infra'
+];
+
 const headers = {
     Authorization: 'test',
     accept: 'application/json'

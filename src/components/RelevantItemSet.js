@@ -15,7 +15,7 @@ export function RelevantItemSet({ title, items, selectItem }) {
             <button className="RelevantItemSet-toggle" onClick={toggle}>{title}</button>
             {isOpened && (
                 <div className="RelevantItemSet-items">
-                    {items.map(item => (<RelevantItem item={item} selectItem={onSelectItem} />))}
+                    {items.map(item => (<RelevantItem key={item} item={item} selectItem={onSelectItem} />))}
                 </div>
             )}
         </div>

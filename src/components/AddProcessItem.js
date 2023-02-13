@@ -1,22 +1,32 @@
-import { useState, useMemo } from 'react';
-import { allUsers, me } from '../api/api';
+import { useState, useMemo, useCallback } from 'react';
+import { allUsers, allDomains, allTeams, me } from '../api/api';
 import './AddProcessItem.css';
 import { RelevantItemSet } from './RelevantItemSet';
+
+// const getFilter = (allItems, items) => allItems.filter(item => !items.includes(item));
+
+function useFilter(allItems, initialState = []) {
+    const [items, setItems] = useState(initialState);
+    const onSelectItem = useCallback(item => {
+        setItems([...items, item]);
+    }, [setItems, items]);
+
+    const availableItems = useMemo(() => {
+        return allItems.filter(item => !items.includes(item));
+    }, [allItems, items]);
+
+    return [items, availableItems, onSelectItem];
+}
 
 export function AddProcessItem({ addProcessItem, onClose }) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [users, setUsers] = useState([me]);
-
-    const availableUsers = useMemo(() => {
-        return allUsers.filter(user => !users.includes(user));
-    }, [users]);
+    const [users, availableUsers, onSelectUser] = useFilter(allUsers, [me]);
+    const [domains, availableDomains, onSelectDomain] = useFilter(allDomains, []);
+    const [teams, availableTeams, onSelectTeam] = useFilter(allTeams, []);
 
     const onChangeName = e => setName(e.target.value);
     const onChangeDescription = e => setDescription(e.target.value);
-    const onSelectUser = user => {
-        setUsers([...users, user]);
-    };
 
     const isValid = () => name.trim(' ');
 
@@ -25,6 +35,8 @@ export function AddProcessItem({ addProcessItem, onClose }) {
         await addProcessItem({
             anchors: {
                 users,
+                domains,
+                teams,
             },
             name,
             description
@@ -46,6 +58,8 @@ export function AddProcessItem({ addProcessItem, onClose }) {
                 Select one item from thie list below and provide us with the information we need in order to create your new process. 
             </p>
 
+            <RelevantItemSet title="Relevant user groups" selectItem={onSelectTeam} items={availableTeams} />
+            <RelevantItemSet title="Relevant domains" selectItem={onSelectDomain} items={availableDomains} />
             <RelevantItemSet title="Relevant usernames" selectItem={onSelectUser} items={availableUsers} />
 
             <form>
