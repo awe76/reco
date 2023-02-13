@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 export function AddProcessItem({ addProcessItem, onClose }) {
-    const [name, setName] = useState();
-    const [description, setDescription] = useState();
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
 
     const onChangeName = e => setName(e.target.value);
     const onChangeDescription = e => setDescription(e.target.value);
