@@ -1,27 +1,30 @@
 import { useState, useEffect } from 'react';
 import { ProcessSet } from './ProcessSet';
-
-const baseUri = '/api/v1';
+import { AddProcessItem } from './AddProcessItem';
+import { fetchProcesses, addProcessItem } from '../api/api';
 
 export function ProcessLibrary() {
     const [items, setItems] = useState([]);
+    const [isOpened, setOpened] = useState(false);
+
+    const onOpen = () => setOpened(true);
+    const onClose = () => setOpened(false);
 
     useEffect(() => {
         async function fetchData() {
-            const resp = await fetch(`${baseUri}/process-metadata`, {
-                headers: {
-                    Authorization: 'fdfsdl',
-                    accept: 'application/json'
-                }
-            });
-            const data = await resp.json();
-
+            const data = await fetchProcesses();
             setItems(data.mds);
         }
         fetchData();
     }, []);
 
     return (
-        <ProcessSet items={items}/>
+        <>
+            <button onClick={onOpen}>Create</button>
+            <ProcessSet items={items}/>
+            {isOpened && (
+                <AddProcessItem addProcessItem={addProcessItem} onClose={onClose} />
+            )}
+        </>
     );
 }

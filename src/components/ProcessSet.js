@@ -7,7 +7,7 @@ export function ProcessSet({items, header}) {
 
         <div>
             {items.map(
-                (item) => <ProcessItem item={item} />
+                (item) => <ProcessItem key={item.id} item={item} />
             )}
         </div>
        </section>
