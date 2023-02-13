@@ -42,6 +42,10 @@ export function AddProcessItem({ addProcessItem, onClose }) {
                 </fieldset>
             </form>
 
+            <p className="RelevantItems-desc">
+                Select one item from thie list below and provide us with the information we need in order to create your new process. 
+            </p>
+
             <RelevantItemSet title="Relevant usernames" selectItem={onSelectUser} items={availableUsers} />
 
             <form>

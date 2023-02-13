@@ -53,3 +53,12 @@ menu {
     flex-wrap: nowrap;
     justify-content: flex-end;
 }
+
+.RelevantItems-desc {
+    line-height: 1.2em;;
+    font-size: 0.85em;
+    color: #323232;
+    display: block;
+    width: 25em;
+    padding-bottom: 1em;
+}
