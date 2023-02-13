@@ -2,8 +2,8 @@ import { ProcessItem } from './ProcessItem';
 import './ProcessSet.css';
 
 export function ProcessSet({items, header}) {
-    return (
-       <section>
+    return items.length > 0 && (
+        <section>
             <h1>{header}</h1>
 
             <div>
@@ -11,6 +11,6 @@ export function ProcessSet({items, header}) {
                     (item) => <ProcessItem key={item.id} item={item} />
                 )}
             </div>
-       </section>
+        </section>
     );
 }
