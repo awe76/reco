@@ -2,6 +2,9 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { ProcessSet } from './ProcessSet';
 import { AddProcessItem } from './AddProcessItem';
 import { fetchProcesses, addProcessItem, isMyItem } from '../api/api';
+import { Header } from './Header';
+
+import './ProcessLibrary.css'; 
 
 export function ProcessLibrary() {
     const [items, setItems] = useState([]);
@@ -34,12 +37,14 @@ export function ProcessLibrary() {
 
     return (
         <>
-            <button onClick={onOpen}>Create</button>
-            <ProcessSet header="My processes" items={my} />
-            <ProcessSet header="Recommended" items={recommended} />
-            {isOpened && (
-                <AddProcessItem addProcessItem={onAddItem} onClose={onClose} />
-            )}
+        <Header onOpen={onOpen} />
+            <main>
+                <ProcessSet header="My processes" items={my} />
+                <ProcessSet header="Recommended" items={recommended} />
+                {isOpened && (
+                    <AddProcessItem addProcessItem={onAddItem} onClose={onClose} />
+                )}
+            </main>
         </>
     );
 }

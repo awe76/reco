@@ -11,6 +11,8 @@
     }
 */
 
+import './ProcessItem.css';
+
 export function ProcessItem({item}) {
     const { name, description } = item;
     return (

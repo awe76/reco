@@ -1,0 +1,24 @@
+article {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 3.80976px 0.952441px 15px rgba(154, 160, 170, 0.15);
+
+    display: inline-block;
+    width: 18em;
+    height: 10em;
+    padding: 1.2em 4.3em 1.2em 0.75em;
+}
+
+article > h2 {
+    display: block;
+    font-size: 1.125em;
+    font-weight: bold;
+    line-height: 1em;
+    margin-bottom: 3em;
+}
+
+article > p {
+    font-size: 0.85em;
+    line-height: 1.25em;
+    color: #666;
+}

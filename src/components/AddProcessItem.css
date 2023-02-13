@@ -1,0 +1,50 @@
+aside {
+    position: fixed;
+    display: block;
+    width: 30em;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fcfcfc;
+    box-shadow: -10px 4px 10px rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
+    padding: 2em 2em;
+}
+
+aside > h2 {
+    color: #323232;
+    font-size: 1.25em;
+    font-weight: 600;
+    line-height: 2em;
+}
+
+form {
+    margin-top: 2em;
+}
+
+input, textarea {
+    display: block;
+    width: 20em;
+    padding: 0.5em 1em;
+    border: 1px solid rgba(17, 35, 68, 0.5);
+    border-radius: 0.35em;
+    margin-bottom: 2em;
+}
+
+button {
+    padding: 0.75em 1em;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.75em;
+    cursor: pointer;
+    margin-right: 1em;
+}
+
+menu {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: end;
+}

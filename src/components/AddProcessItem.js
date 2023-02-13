@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './AddProcessItem.css';
 
 export function AddProcessItem({ addProcessItem, onClose }) {
     const [name, setName] = useState('');
@@ -18,18 +19,19 @@ export function AddProcessItem({ addProcessItem, onClose }) {
     };
 
     return (
-        <form>
-            <label>
-                Name:
-                <input value={name} onChange={onChangeName} />
-            </label>
-            <label>
-                Description:
-                <input value={description} onChange={onChangeDescription}/> 
-            </label>
+        <aside>
+            <h2>Create New Process</h2>
+            <form>
+                <fieldset>
+                    <input value={name} placeholder="Process Name (mandatory)" onChange={onChangeName} />
+                    <textarea value={description} placeholder="Description" onChange={onChangeDescription}/> 
+                </fieldset>
 
-            <button type="submit" onClick={onAddProcessItem}>Add</button>
-            <button onClick={onClose}>Cancel</button>
-        </form>
+                <menu>
+                    <button type="submit" onClick={onAddProcessItem}>Add</button>
+                    <button onClick={onClose}>Cancel</button>
+                </menu>
+            </form>
+        </aside>
     );
 } 

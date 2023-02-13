@@ -1,0 +1,12 @@
+section > h1 {
+    font-weight: bold;
+    font-size: 1.25em;
+    padding: 1em 0 2em 0;
+    color: #2b2b2b;
+}
+
+section > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em 3em;
+}
