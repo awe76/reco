@@ -10,7 +10,7 @@ const headers = {
 
 
 export const isMyItem = (item) => {
-    return item.users?.includes(my);
+    return item.anchors?.users?.includes(my);
 };
 
 export async function addProcessItem(item) {
@@ -22,8 +22,10 @@ export async function addProcessItem(item) {
         },
         body: JSON.stringify({
             md: {
-                users: [my],
-                item
+                anchors: {
+                    users: [my],
+                },
+                ...item
             }
         })
     });
