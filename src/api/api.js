@@ -1,8 +1,16 @@
 const baseUri = 'http://localhost:8080/api/v1';
 
+const my = 'Andrei';
+
 const headers = {
     Authorization: 'test',
     accept: 'application/json'
+};
+
+
+
+export const isMyItem = (item) => {
+    return item.users?.includes(my);
 };
 
 export async function addProcessItem(item) {
@@ -13,9 +21,14 @@ export async function addProcessItem(item) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            md: item
+            md: {
+                users: [my],
+                item
+            }
         })
     });
+
+    await fetchProcesses();
 }
 
 export async function fetchProcesses() {
