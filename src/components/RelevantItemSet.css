@@ -1,0 +1,22 @@
+.RelevantItemSet-toggle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0;
+}
+
+.RelevantItemSet-toggle::before {
+    content: "\21A7";
+    font-size: 1.5em;
+}
+
+.RelevantItemSet-toggle:hover {
+    text-decoration: underline;
+}
+
+.RelevantItemSet-items {
+    padding-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+}

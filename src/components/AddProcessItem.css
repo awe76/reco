@@ -31,7 +31,7 @@ input, textarea {
     margin-bottom: 2em;
 }
 
-button {
+menu > button {
     padding: 0.75em 1em;
     background-color: #000;
     color: #fff;
@@ -41,6 +41,11 @@ button {
     font-size: 0.75em;
     cursor: pointer;
     margin-right: 1em;
+}
+
+menu > button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 menu {

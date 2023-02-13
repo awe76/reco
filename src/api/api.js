@@ -2,7 +2,14 @@ const baseUri = 'http://localhost:8080/api/v1';
 
 let maxId = 0;
 
-const my = 'Andrei';
+export const me = 'Andrei';
+
+export const allUsers = [
+    'Donald',
+    'Bill',
+    'Michael',
+    'Ben'
+];
 
 const headers = {
     Authorization: 'test',
@@ -10,7 +17,7 @@ const headers = {
 };
 
 export const isMyItem = (item) => {
-    return item.anchors?.users?.includes(my);
+    return item.anchors?.users?.includes(me);
 };
 
 export async function addProcessItem(item) {
@@ -23,9 +30,6 @@ export async function addProcessItem(item) {
         body: JSON.stringify({
             md: {
                 ...item,
-                anchors: {
-                    users: [my],
-                },
                 id: String(++maxId),
             }
         })

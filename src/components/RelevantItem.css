@@ -1,0 +1,10 @@
+.RelevantItem-btn {
+    padding: 0.25em 0.5em;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    font-size: 0.85em;
+    cursor: pointer;
+    margin-right: 0.5em;
+}

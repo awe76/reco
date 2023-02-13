@@ -1,7 +1,7 @@
 import { ProcessItem } from './ProcessItem';
-import './ProcessSet.css';
+import './ProcessItemSet.css';
 
-export function ProcessSet({items, header}) {
+export function ProcessItemSet({items, header}) {
     return items.length > 0 && (
         <section>
             <h1>{header}</h1>
