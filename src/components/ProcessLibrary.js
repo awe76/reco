@@ -53,7 +53,7 @@ export function ProcessLibrary() {
 
     return (
         <>
-        <Header onOpen={onOpen} />
+            <Header onOpen={onOpen} />
             <main>
                 <ProcessItemSet header="My processes" editItem={editItem} items={my} />
                 <ProcessItemSet header="Recommended" editItem={editItem} items={recommended} />
