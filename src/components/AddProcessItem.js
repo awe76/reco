@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, memo } from 'react';
 import { allUsers, allDomains, allTeams, me } from '../api/api';
 import './AddProcessItem.css';
 import { RelevantItemSet } from './RelevantItemSet';
@@ -31,7 +31,7 @@ const newItem = {
     description: '',
 };
 
-export function AddProcessItem({ addProcessItem, editProcessItem, onClose, isEdit, item = newItem }) {
+export const AddProcessItem = memo(function AddProcessItem({ addProcessItem, editProcessItem, onClose, isEdit, item = newItem }) {
     const { anchors } = item;
 
     const [name, setName] = useState(item.name);
@@ -94,4 +94,4 @@ export function AddProcessItem({ addProcessItem, editProcessItem, onClose, isEdi
             
         </aside>
     );
-} 
+});

@@ -1,4 +1,4 @@
-const baseUri = 'http://localhost:8080/api/v1';
+const baseUri = '/api/v1';
 
 let maxId = 0;
 
@@ -28,7 +28,9 @@ export const allTeams = [
 
 const headers = {
     Authorization: 'test',
-    accept: 'application/json'
+    accept: 'application/json',
+    'Access-Control-Allow-Origin': 'http://localhost:3000',
+    'Access-Control-Allow-Credentials': 'true',
 };
 
 export const isMyItem = (item) => {

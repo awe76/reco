@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, memo } from 'react';
 import './RelevantItem.css';
 
-export function RelevantItem({selectItem, item}) {
+export const RelevantItem = memo(function RelevantItem({selectItem, item}) {
     const onSelectItem = useCallback(() => {
         selectItem(item);
     }, [item, selectItem]);
@@ -9,4 +9,4 @@ export function RelevantItem({selectItem, item}) {
     return (
         <button className="RelevantItem-btn" onClick={onSelectItem}>{item}</button>
     );
-}
+});

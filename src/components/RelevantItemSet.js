@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, memo } from 'react';
 import { RelevantItem  } from './RelevantItem';
 import './RelevantItemSet.css';
 
-export function RelevantItemSet({ title, selectedTitle, items, selectedItems, selectItem, unselectItem }) {
+export const RelevantItemSet = memo(function RelevantItemSet({ title, selectedTitle, items, selectedItems, selectItem, unselectItem }) {
     const [isOpened, setOpened] = useState(false);
     const toggle = useCallback(() => setOpened(!isOpened), [isOpened]);
 
@@ -27,4 +27,4 @@ export function RelevantItemSet({ title, selectedTitle, items, selectedItems, se
             )}
         </div>
     );
-}
+});

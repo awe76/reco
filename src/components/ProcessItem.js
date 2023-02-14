@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, memo } from 'react';
 import './ProcessItem.css';
 
-export function ProcessItem({item, editItem}) {
+export const ProcessItem = memo(function ProcessItem({item, editItem}) {
     const { name, description } = item;
 
     const onEditItem = useCallback(() => {
@@ -15,4 +15,4 @@ export function ProcessItem({item, editItem}) {
             <p>{description}</p>
        </article>
     );
-}
+});

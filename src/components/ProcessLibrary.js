@@ -49,7 +49,7 @@ export function ProcessLibrary() {
         return currentItem !== undefined;
     }, [currentItem]);
     
-    const onClose = () => setOpened(false);
+    const onClose = useCallback(() => setOpened(false), [setOpened]);
 
     return (
         <>

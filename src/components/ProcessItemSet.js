@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { ProcessItem } from './ProcessItem';
 import './ProcessItemSet.css';
 
-export function ProcessItemSet({items, editItem, header}) {
+export const ProcessItemSet = memo(function ProcessItemSet({items, editItem, header}) {
     return items.length > 0 && (
         <section>
             <h1>{header}</h1>
@@ -13,4 +14,4 @@ export function ProcessItemSet({items, editItem, header}) {
             </div>
         </section>
     );
-}
+});
